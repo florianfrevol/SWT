@@ -13,4 +13,4 @@ What will be done in the future:
 - Initialise quickly a php server 
 - Make several command for you (ex: zip, tar..), instead loosing time searching for command in Internet.
 
-![alt text](https://github.com/florianfrevol/SWT/tree/master/Img/test_image.png)
+![Logo SWT](https://github.com/florianfrevol/SWT/tree/master/Img/test_image.png)
