@@ -2,8 +2,8 @@
 
 void cpp()
 {
-    std::string src_folder = "sources";
-    std::string headers_folder = "headers";
+    std::string src_folder = find_variable_config("SOURCE_FOLDER");
+    std::string headers_folder = find_variable_config("HEADER_FOLDER");
     struct stat sb;
 
     if (stat("SrcCpy/gitignore/gitignore", &sb) == -1)
@@ -24,8 +24,8 @@ void cpp()
 
 void c()
 {
-    std::string src_folder = "sources";
-    std::string headers_folder = "headers";
+    std::string src_folder = find_variable_config("SOURCE_FOLDER");
+    std::string headers_folder = find_variable_config("HEADER_FOLDER");
     struct stat sb;
 
     if (stat("SrcCpy/gitignore/gitignore", &sb) == -1)

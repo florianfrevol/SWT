@@ -5,12 +5,20 @@
 ## 
 ##
 
-NAME		=	InitDir
+NAME		=	swt
 
 DIR			=	sources
 
-SRCS		=	InitDir.cpp
-		
+##BEGIN_SRC
+
+SRCS		=	InitDir.cpp\
+				create_dir.cpp\
+				update_makefile.cpp\
+				parse_config_value.cpp\
+				help.cpp
+
+##END_SRC
+
 INCDIRS 	:= $(addprefix -I,$(shell find headers -type d -print))
 
 CXXFLAGS	+=	-W -Wall -Wextra -g
