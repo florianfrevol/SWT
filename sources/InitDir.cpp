@@ -1,19 +1,11 @@
-#include <stdio.h>
-#include <string.h>
-#include <sstream>
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include <bits/stdc++.h>
-#include <sys/stat.h>
-#include <sys/types.h>
+
+#include "SWT.hpp"
 
 void write_file_to_another(std::string src, std::string dest)
 {
     std::string line;
     std::string const HOME = std::getenv("HOME") ? std::getenv("HOME") : ".";
-    std::ifstream file( HOME + "/tools/InitDir/" + src);
+    std::ifstream file( HOME + "/tools/SWT/" + src);
     std::ofstream outfile;
 
     outfile.open(dest, std::ios_base::app);
@@ -32,45 +24,6 @@ char *convertStringToCharStars(std::string str)
     return (cstr);
 }
 
-void cpp()
-{
-    std::string src_folder = "sources";
-    std::string headers_folder = "headers";
-    struct stat sb;
-
-    
-    if (stat(convertStringToCharStars(src_folder), &sb) == -1) {
-        mkdir(convertStringToCharStars(src_folder), 0777);
-        write_file_to_another("src/main", src_folder + "/main.cpp");
-    }
-    if (stat(convertStringToCharStars(headers_folder), &sb) == -1) {
-        mkdir(convertStringToCharStars(headers_folder), 0777);
-        write_file_to_another("headers/main", headers_folder + "/main.hpp");
-    }
-    if (stat("Makefile", &sb) == -1)
-        write_file_to_another("Makefiles/Makefile_cpp", "Makefile");
-}
-
-void c()
-{
-    std::string src_folder = "sources";
-    std::string headers_folder = "headers";
-    struct stat sb;
-
-    if (stat(convertStringToCharStars(src_folder), &sb) == -1)
-    {
-        mkdir(convertStringToCharStars(src_folder), 0777);
-        write_file_to_another("src/main", src_folder + "/main.c");
-    }
-    if (stat(convertStringToCharStars(headers_folder), &sb) == -1)
-    {
-        mkdir(convertStringToCharStars(headers_folder), 0777);
-        write_file_to_another("headers/main", headers_folder + "/main.h");
-    }
-    if (stat("Makefile", &sb) == -1)
-        write_file_to_another("Makefiles/Makefile_c", "Makefile");
-}
-
 int main(int argc, char **argv)
 {
     if (argc < 2)
@@ -80,5 +33,7 @@ int main(int argc, char **argv)
         cpp();
     if (strcmp(argv[1], "c") == 0)
         c();
+    if (strcmp(argv[1], "update") == 0)
+        update_makefile();
     return 0;
 }
