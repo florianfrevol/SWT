@@ -5,7 +5,7 @@ void write_file_to_another(std::string src, std::string dest)
 {
     std::string line;
     std::string const HOME = std::getenv("HOME") ? std::getenv("HOME") : ".";
-    std::ifstream file( HOME + "/tools/SWT/" + src);
+    std::ifstream file(HOME + "/tools/SWT/" + src);
     std::ofstream outfile;
 
     outfile.open(dest, std::ios_base::app);
@@ -36,6 +36,8 @@ int initdir(int argc, char **argv)
         update_makefile();
     if (strcmp(argv[2], "-change") == 0 && (argc < 4 || strcmp(argv[3], "--help") == 0))
         print_help_change_initdir();
+    if (argc > 3 && strcmp(argv[2], "-change") == 0 && strcmp(argv[3], "-reset") == 0)
+        print_local_value();
     if (argc > 3 && strcmp(argv[2], "-change") == 0)
         change_local_value(argv[3]);
 }

@@ -1,2 +1,2 @@
 make re
-sudo cp ~/tools/SWT/swt /bin/
+sudo cp swt /bin/swtt

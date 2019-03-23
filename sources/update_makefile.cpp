@@ -1,30 +1,33 @@
 #include "SWT.hpp"
 
-std::vector<char *> open_dir(const char *str)
+void listFiles(const std::string &path, std::function<void(const std::string &)> cb)
 {
+    if (auto dir = opendir(path.c_str()))
+    {
+        while (auto f = readdir(dir))
+        {
+            if (!f->d_name || f->d_name[0] == '.')
+                continue;
+            if (f->d_type == DT_DIR)
+                listFiles(path + f->d_name + "/", cb);
 
-    DIR *dir;
-    struct dirent *dent;
-    dir = opendir(str);
-    std::vector<char *> vector;
-
-    if (dir != NULL) {
-        while ((dent = readdir(dir)) != NULL) {
-            if ((strcmp(dent->d_name, ".") == 0 || strcmp(dent->d_name, "..") == 0 || (*dent->d_name) == '.')) {
-            } else {
-                vector.push_back(dent->d_name);
-            }
+            if (f->d_type == DT_REG)
+                cb(path + f->d_name);
         }
+        closedir(dir);
     }
-    return (vector);
 }
 
+    std::vector<char *> vector;
 void update_makefile()
 {
-    std::vector<char *> vector ;
-    
-    std::system("make clean");
-    vector = open_dir("sources");
+
+        std::system("make clean");
+
+    listFiles(find_variable_config("SOURCE_FOLDER").append("/"), [](const std::string &path) {
+        vector.push_back(convertStringToCharStars(path));
+    });
+
     for (unsigned int i = 0; i < vector.size(); i++) {
         printf("%s\n", vector.at(i));
     }

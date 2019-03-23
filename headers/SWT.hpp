@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <vector>
 
 void cpp();
 void c();
@@ -20,3 +21,4 @@ void print_help_initdir();
 void change_local_value(std::string value_to_change);
 void print_help_change_initdir();
 void print_help_swt();
+void print_local_value();

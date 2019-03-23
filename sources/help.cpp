@@ -25,3 +25,25 @@ void print_help_swt()
     std::cout << "\t--help\t\t\tPrint this help" << std::endl;
     std::cout << "\t-initdir\t\tInitialize a repository" << std::endl;
 }
+
+void print_local_value()
+{
+    std::string variable;
+    std::string line;
+    std::string const HOME = std::getenv("HOME") ? std::getenv("HOME") : ".";
+    std::system(convertStringToCharStars(((std::string) "cp ").append(HOME).append("/tools/SWT/local_variable/base_src_folder.config ").append(".swt")));
+    std::ifstream file(".swt");
+    std::string tempStr;
+    unsigned int i;
+
+    if (file) {
+        while (getline(file, line)) {
+            tempStr = line;
+            for (i = 0; line.at(i) != ':'; i ++);
+            std::cout << "value " << tempStr.replace(i, tempStr.size(), "") << " has been set to " << line.replace(0, i + 1, "") << std::endl;
+        }
+    }
+    else
+        std::cerr << "File Error" << std::endl;
+    exit(0);
+}
